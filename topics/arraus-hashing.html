@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays and Hashing Flashcards - LeetCode Flashcards</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .perspective-lg {
+            perspective: 1000px;
+        }
+        
+        .transform-style-preserve-3d {
+            transform-style: preserve-3d;
+        }
+        
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        .card {
+            height: 16rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            overflow: auto;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+    <script>
+        function toggleCard(cardId) {
+            document.getElementById(cardId).classList.toggle('flipped');
+        }
+
+        function showCardDetails(cardId) {
+            // Hide all flashcards
+            document.getElementById('flashcards-container').style.display = 'none';
+            
+            // Show card details section
+            document.getElementById('card-details-container').style.display = 'block';
+            
+            // Show the specific card detail
+            document.querySelectorAll('.card-detail').forEach(el => {
+                el.style.display = 'none';
+            });
+            document.getElementById('detail-' + cardId).style.display = 'block';
+        }
+
+        function backToCards() {
+            // Show all flashcards
+            document.getElementById('flashcards-container').style.display = 'block';
+            
+            // Hide card details section
+            document.getElementById('card-details-container').style.display = 'none';
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <div class="p-6">
+        <div class="flex items-center mb-6">
+            <a href="../index.html" class="mr-4 bg-gray-200 hover:bg-gray-300 p-2 rounded">← Back</a>
+            <h1 class="text-2xl font-bold">Arrays and Hashing Flashcards</h1>
+        </div>
+        
+        <!-- Flashcards List -->
+        <div id="flashcards-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Flashcard 1: Contains Duplicate -->
+            <div id="card-1" class="card perspective-lg">
+                <div class="card-inner">
+                    <div class="card-front bg-blue-50 border border-blue-200 rounded-lg p-5 shadow-md cursor-pointer" onclick="toggleCard('card-1')">
+                        <div class="flex flex-col h-full">
+                            <h3 class="font-bold text-lg text-blue-700 mb-4">Contains Duplicate</h3>
+                            <div class="flex-grow mb-4">
+                                <h4 class="font-medium mb-2">Question:</h4>
+                                <p class="text-sm">Check if an array contains any duplicates.</p>
+                            </div>
+                            <div class="mt-auto border-t border-blue-200 pt-3">
+                                <h4 class="font-medium text-sm mb-1">Hint:</h4>
+                                <p class="text-sm italic text-gray-600">Think about using a data structure that allows for quick lookup.</p>
+                            </div>
+                            <p class="text-xs text-center mt-2 text-gray-400">Click to flip</p>
+                        </div>
+                    </div>
+                    <div class="card-back bg-white border border-gray-200 rounded-lg p-4 shadow-md cursor-pointer" onclick="toggleCard('card-1')">
+                        <div class="flex flex-col h-full">
+                            <h3 class="font-bold text-lg text-gray-800">Contains Duplicate</h3>
+                            <div class="flex-grow overflow-auto">
+                                <div class="mb-3">
+                                    <h4 class="font-medium text-sm">In One Line:</h4>
+                                    <p class="text-sm">Use a set to check if any element repeats.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h4 class="font-medium text-sm">Simple Explanation:</h4>
+                                    <p class="text-xs whitespace-pre-line">We go through each number.
+We keep a list of ones we've already seen.
+If a number shows up again, we know it's a duplicate.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h4 class="font-medium text-sm">Mnemonics:</h4>
+                                    <ul class="text-xs list-disc pl-4">
+                                        <li>"Seen before?" → if num in seen: return True</li>
+                                        <li>"Add new" → seen.add(num)</li>
+                                        <li>"End clean" → return False</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <button 
+                                class="mt-auto block w-full py-1 bg-green-100 text-green-800 rounded text-sm"
+                                onclick="event.stopPropagation(); showCardDetails('1');"
+                            >
+                                View Full Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flashcard 2: Valid Anagram -->
+            <div id="card-2" class="card perspective-lg">
+                <div class="card-inner">
+                    <div class="card-front bg-blue-50 border border-blue-200 rounded-lg p-5 shadow-md cursor-pointer" onclick="toggleCard('card-2')">
+                        <div class="flex flex-col h-full">
+                            <h3 class="font-bold text-lg text-blue-700 mb-4">Valid Anagram</h3>
+                            <div class="flex-grow mb-4">
+                                <h4 class="font-medium mb-2">Question:</h4>
+                                <p class="text-sm">Determine if two strings are anagrams (contain the same letters).</p>
+                            </div>
+                            <div class="mt-auto border-t border-blue-200 pt-3">
+                                <h4 class="font-medium text-sm mb-1">Hint:</h4>
+                                <p class="text-sm italic text-gray-600">Count the frequency of characters in both strings and compare.</p>
+                            </div>
+                            <p class="text-xs text-center mt-2 text-gray-400">Click to flip</p>
+                        </div>
+                    </div>
+                    <div class="card-back bg-white border border-gray-200 rounded-lg p-4 shadow-md cursor-pointer" onclick="toggleCard('card-2')">
+                        <div class="flex flex-col h-full">
+                            <h3 class="font-bold text-lg text-gray-800">Valid Anagram</h3>
+                            <div class="flex-grow overflow-auto">
+                                <div class="mb-3">
+                                    <h4 class="font-medium text-sm">In One Line:</h4>
+                                    <p class="text-sm">Use counters (hashmaps) to compare character frequencies.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h4 class="font-medium text-sm">Simple Explanation:</h4>
+                                    <p class="text-xs whitespace-pre-line">We count the letters in both words.
+If every letter shows up the same number of times, it's an anagram.
+Otherwise, it's not.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h4 class="font-medium text-sm">Mnemonics:</h4>
+                                    <ul class="text-xs list-disc pl-4">
+                                        <li>"Count both" → Counter(s) == Counter(t)</li>
+                                        <li>"Compare maps" → for key in counts: compare values</li>
+                                        <li>"Return result" → return True/False</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <button 
+                                class="mt-auto block w-full py-1 bg-green-100 text-green-800 rounded text-sm"
+                                onclick="event.stopPropagation(); showCardDetails('2');"
+                            >
+                                View Full Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more flashcards here following the same pattern -->
+        </div>
+
+        <!-- Card Details Container -->
+        <div id="card-details-container" style="display: none;">
+            <div class="flex items-center mb-6">
+                <button onclick="backToCards()" class="mr-4 bg-gray-200 hover:bg-gray-300 p-2 rounded">← Back to Flashcards</button>
+            </div>
+
+            <!-- Contains Duplicate Details -->
+            <div id="detail-1" class="card-detail">
+                <h1 class="text-xl font-bold mb-6">Contains Duplicate</h1>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="mb-4">
+                        <h2 class="text-lg font-semibold mb-2">Question:</h2>
+                        <p>Check if an array contains any duplicates.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h2 class="text-lg font-semibold mb-2">In One Line:</h2>
+                        <p>Use a set to check if any element repeats.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h2 class="text-lg font-semibold mb-2">Simple Explanation:</h2>
+                        <p class="whitespace-pre-line">We go through each number.
+We keep a list of ones we've already seen.
+If a number shows up again, we know it's a duplicate.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h2 class="text-lg font-semibold mb-2">Mnemonics:</h2>
+                        <ul class="list-disc pl-6">
+                            <li>"Seen before?" → if num in seen: return True</li>
+                            <li>"Add new" → seen.add(num)</li>
+                            <li>"End clean" → return False</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 text-white p-4 rounded-lg mb-4">
+                    <h2 class="text-lg font-semibold mb-2">Code Implementation:</h2>
+                    <pre class="overflow-x-auto text-sm">def hasDuplicate(nums):
+    seen = set()
+    for num in nums:
+        if num in seen:
+            return True
+        seen.add(num)
+    return False</pre>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-4">
+                    <div class="mb-2">
+                        <span class="font-semibold">Time Complexity:</span> O(n) - one pass through the array
+                    </div>
+                    <div>
+                        <span class="font-semibold">Space Complexity:</span> O(n) - in worst case, all elements in set
+                    </div>
+                </div>
+            </div>
+
+            <!-- Valid Anagram Details -->
+            <div id="detail-2" class="card-detail" style="display: none;">
+                <h1 class="text-xl font-bold mb-6">Valid Anagram</h1>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="mb-4">
+                        <h2 class="text-lg font-semibold mb-2">Question:</h2>
+                        <p>Determine if two strings are anagrams (contain the same letters).</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h2 class="text-lg font-semibold mb-2">In One Line:</h2>
+                        <p>Use counters (hashmaps) to compare character frequencies.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h2 class="text-lg font-semibold mb-2">Simple Explanation:</h2>
+                        <p class="whitespace-pre-line">We count the letters in both words.
+If every letter shows up the same number of times, it's an anagram.
+Otherwise, it's not.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h2 class="text-lg font-semibold mb-2">Mnemonics:</h2>
+                        <ul class="list-disc pl-6">
+                            <li>"Count both" → Counter(s) == Counter(t)</li>
+                            <li>"Compare maps" → for key in counts: compare values</li>
+                            <li>"Return result" → return True/False</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 text-white p-4 rounded-lg mb-4">
+                    <h2 class="text-lg font-semibold mb-2">Code Implementation:</h2>
+                    <pre class="overflow-x-auto text-sm">def isAnagram(s, t):
+    if len(s) != len(t):
+        return False
+
+    count = [0] * 26
+    for i in range(len(s)):
+        count[ord(s[i]) - ord('a')] += 1
+        count[ord(t[i]) - ord('a')] -= 1
+
+    for val in count:
+        if val != 0:
+            return False
+    return True</pre>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-4">
+                    <div class="mb-2">
+                        <span class="font-semibold">Time Complexity:</span> O(n) - where n is the length of the strings
+                    </div>
+                    <div>
+                        <span class="font-semibold">Space Complexity:</span> O(1) - fixed array size for character counts
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more card details here following the same pattern -->
+        </div>
+    </div>
+</body>
+</html>
